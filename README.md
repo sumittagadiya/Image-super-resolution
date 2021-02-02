@@ -1,6 +1,8 @@
 # Image-super-resolution using Enhanced Deep Residual Networks for Single Image Super-Resolution(EDSR) and Wide Activation for Efficient and Accurate Image Super-Resolution(WDSR)
 
-If page is not loading then please paste above ipynb github link [here](https://nbviewer.jupyter.org/). Now you can view ipynb notebook successfully !!
+Image Super Resolution using EDSR and WDSR research papers
+
+Note : If page is not loading then please paste above ipynb github link [here](https://nbviewer.jupyter.org/). Now you can view ipynb notebook successfully !!
 
 # EDSR 
 ### Architecture of EDSR :
