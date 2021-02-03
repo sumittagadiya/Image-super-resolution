@@ -1,4 +1,5 @@
 pip==21.0.1
+gunicorn==19.9.0
 tensorflow-cpu
 Pillow
 flask
