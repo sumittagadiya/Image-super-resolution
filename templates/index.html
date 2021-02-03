@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<title>Image Super Resolution</title>
+<style>
+    html, body {
+      height:100%;
+      background-image: url('https://miro.medium.com/max/1400/1*a4tiXdRcOxYEQn-SyV6Jcw.png');
+      background-repeat:no-repeat;
+      background-size:cover;
+    }
+
+    .button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        transition-duration: 0.4s;
+        cursor: pointer;
+        }
+        .button2 {
+            background-color: white; 
+            color: black; 
+            border: 2px solid #008CBA;
+            }
+
+        .button2:hover {
+            background-color: #008CBA;
+            color: white;
+            }
+</style>
+
+<body>
+<center><h1 style="color:rgb(0, 255, 255);">Image Super Resolution</h1></center>
+<br>
+
+<form action="/predicted" method="post" enctype="multipart/form-data">
+    <center><h2 style="color:rgb(0, 255, 13);"> Please Upload Bicubic/Unknown downgraded Image </h2></center>
+    <center><input type="file" name="image" style="color:red;" id="image" accept=".png, .jpg, .jpeg" required></center>
+    <br>
+    <center><h2 style="color:rgb(0, 255, 13);">Select Model</h2></center>
+
+<center>
+<b>
+    <p style="color:rgb(70, 206, 216);">If you have bicubic downgrade image then select bicubic_x4 otherwise select unknown_x4 from dropdown.</p>
+    <p style="color:rgb(70, 206, 216);">Bydefault bicubic model will be used</p>
+    <p style="color:rgb(70, 206, 216);">Note : Do not upload High Resolution or image size more then 1 MB</p>
+    <p style="color:rgb(70, 206, 216);">Download SET 5 dataset from 
+        <a href="https://uofi.box.com/shared/static/kfahv87nfe8ax910l85dksyl2q212voc.zip">here</a> 
+        and SET 14 dataset from 
+        <a href="https://uofi.box.com/shared/static/igsnfieh4lz68l926l8xbklwsnnk8we9.zip">here</a></p>
+
+</b>
+</center>
+
+    <center>
+        <select name="models" id="models">
+        <option value="edsr_bicubic">EDSR_Bicubic_x4</option>
+        <option value="edsr_unknown">EDSR_Unknown_x4</option>
+        </select>
+   </center>
+    <br><br>
+    <center>
+    <button class="button button2" type="submit"><b>Predict</b></button>
+    </center>
+</form>
+</body>
+
+</html>

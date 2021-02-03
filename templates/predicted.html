@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<title>Predicted</title>
+<style>
+    html, body {
+      height:100%;
+      background-image: url('https://miro.medium.com/max/1400/1*a4tiXdRcOxYEQn-SyV6Jcw.png');
+      background-repeat:repeat;
+      background-size:cover;
+    }
+
+    * {
+      box-sizing: border-box;
+      }
+
+    .column {
+      float: left;
+      width: 33.33%;
+      padding: 5px;
+    }
+
+    /* Clearfix (clear floats) */
+    .row::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+    </style>
+
+<body>
+<center><h1 style="color:rgb(0, 255, 255);">Result</h1></center>
+<br>
+    
+{% if uploaded_image %}
+<div class="row">
+  <div class="column">
+    <h3 style="color:rgb(0, 255, 255);"> Uploaded_image</h3>
+    <img src="static/uploaded/{{uploaded_image}}" height="250" width="250">
+  </div>
+  <div class="column">
+    <h3 style="color:rgb(0, 255, 255);"> Predicted Image </h3>
+    <img src="static/predicted/{{pred_image}}" height="250" width="250">
+  </div>
+</div>
+{%endif%}
+</body>
+
+</html>
