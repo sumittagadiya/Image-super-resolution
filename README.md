@@ -2,7 +2,7 @@
 
 Image Super Resolution using EDSR and WDSR research papers
 
-**You can find Deployed Working model [here](http://ec2-54-236-46-15.compute-1.amazonaws.com:8080/)**
+**You can find Deployed Working model [here](http://ec2-52-87-152-145.compute-1.amazonaws.com:8080/)**
 
 **Find detailed blog of my project [here](https://sumittagadiya.medium.com/image-super-resolution-using-edsr-and-wdsr-f4de0b00e039)**
 
