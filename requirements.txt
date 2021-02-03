@@ -1,4 +1,4 @@
-pip install pip==21.0.1
-pip install tensorflow-cpu
-pip install Pillow
-pip install flask
+pip==21.0.1
+tensorflow-cpu
+Pillow
+flask
