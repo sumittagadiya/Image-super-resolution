@@ -8,6 +8,9 @@ Image Super Resolution using EDSR and WDSR research papers
 
 **Note : If page is not loading then please paste above ipynb github link [here](https://nbviewer.jupyter.org/). Now you can view ipynb notebook successfully !!**
 
+# Demo of Working Model
+![alt_text](https://github.com/sumittagadiya/Image-super-resolution/blob/main/working_demo.gif?raw=true)
+
 # EDSR 
 ### Architecture of EDSR :
 
