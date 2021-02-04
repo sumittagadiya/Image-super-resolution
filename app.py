@@ -1,9 +1,11 @@
 import os
 import random
+import io
 import numpy as np
+from silence_tensorflow import silence_tensorflow
+silence_tensorflow()
 import tensorflow as tf
 from PIL import Image
-
 
 
 from flask import Flask,flash, redirect, url_for, request, render_template
@@ -11,6 +13,7 @@ from werkzeug.utils import secure_filename
 
 # Define a flask app
 app = Flask(__name__)
+app.config['MAX_CONTENT_LENGTH'] = 0.2 * 1024 * 1024
 
 ########################### PATH ###########################################
 # model architacture path
@@ -51,6 +54,16 @@ def generate_random_name(filename):
 def load_image(path):
     return np.array(Image.open(path))
 
+#################### Resize ####################################
+def resize(img,size=[256,256]):
+    if (img.shape[0] | img.shape[1]) > 256:
+        #print('True')
+        img = tf.image.resize(img,size,method='bicubic',preserve_aspect_ratio=True)
+        img = np.clip(img,0,255)
+        img = np.round(img)
+        img = img.astype(np.uint8)
+    return tf.keras.preprocessing.image.array_to_img(img)
+
 #################### Get predicted image ###########################
 def predict(lr_path,model):
     '''' Get super resolution image from model'''
@@ -74,6 +87,7 @@ def predict(lr_path,model):
 @app.route('/')
 
 def upload():
+    
     return render_template('index.html')
 
 
@@ -92,17 +106,22 @@ def predicted():
     # if not image uploaded then redirect
     if image_file.filename == '' :
         return redirect(request.url)
+
     
     # if image is uploaded then do further process
     if image_file :
         ############### if model = edsr_unknown #######################
         if str(request.form.get('models')) == 'edsr_unknown' :
             print('***** Using EDSR Unknown_x4 model weights ******')
-            # Save the file to ./uploads
             file_path = os.path.join(UPLOAD_FOLDER,image_file.filename)
+            # Save the file to ./uploads
+            content = image_file.read()
+            im = Image.open(io.BytesIO((content)))
+            # resize
+            im = resize(np.array(im))
+            #print('*********Image shape*********',np.array(im).shape)
             # save uploaded image
-            image_file.save(file_path)
-
+            im.save(file_path)
             # Make prediction
             preds = predict(file_path, model1)
             # convert array to img
@@ -122,8 +141,13 @@ def predicted():
 
         print('************ Using bicubic_x4 model weights **********')
         file_path = os.path.join(UPLOAD_FOLDER,image_file.filename)
+        content = image_file.read()
+        im = Image.open(io.BytesIO((content)))
+        # resize
+        im = resize(np.array(im))
+        #print('*********Image shape*********',np.array(im).shape)
         # save uploaded image
-        image_file.save(file_path)
+        im.save(file_path)
         # Make prediction
         preds = predict(file_path, model)
         # convert array to img
@@ -139,7 +163,11 @@ def predicted():
         return render_template('predicted.html', 
         uploaded_image=image_file.filename, pred_image=pred_filename)
 
+@app.errorhandler(413)
+def too_large(e):
+    return render_template('limit.html'),413
+
 
 if __name__ == '__main__':
     
-    app.run(debug=True)
+    app.run(host='0.0.0.0',port=8080,debug=True)
