@@ -13,7 +13,7 @@ from werkzeug.utils import secure_filename
 
 # Define a flask app
 app = Flask(__name__)
-app.config['MAX_CONTENT_LENGTH'] = 0.2 * 1024 * 1024
+app.config['MAX_CONTENT_LENGTH'] = 0.1 * 1024 * 1024
 
 ########################### PATH ###########################################
 # model architacture path
